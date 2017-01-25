@@ -20,7 +20,7 @@ These characteristics can be modeled in Spice by a Voltage dependent Voltage sou
 Real vs Ideal Op-Amp
 ---------------------
 
-+===========================+=========+================+
++---------------------------+---------+----------------+
 | Parameter                 | Ideal   |  Typical Real  |
 +===========================+=========+================+
 | Differential voltage gain |  ∞      |  1E5 - 1E9     |
