@@ -62,6 +62,43 @@ Recommended if you plan on using this component often across multiple projects
   - You will notice the lines :code:`PINATTR SpiceOrder 1` and  :code:`PINATTR PinName In+`
   
     + These numbers should correspond to the definition within your *.subckt* for the symbol diagram to be coherent
+    + Note that :code:`SpiceOrder` refers to the order in which the pins are defined in the subckt (left to right) not the actual numbers of letters
+
+      * The PinName which describes the coherence between schematic and pin is what is important
+
+e.g. SpiceModel File : *MyOpA.mod*
+
+::
+
+  * Connections:        +input
+  *                       |  -input
+  *                       |    | +Vsupply
+  *                       |    |    | -Vsupply
+  *                       |    |    |    |  output
+  *                       |    |    |    |    |
+  .subckt myopa123         3    2    7    4    6
+
+e.g. Spice Schematic: *MyOpA.asy*
+
+:: 
+
+  PIN -32 48 NONE 0
+  PINATTR PinName In-
+  PINATTR SpiceOrder 2
+  PIN -32 80 NONE 0
+  PINATTR PinName In+
+  PINATTR SpiceOrder 1
+  PIN 0 96 NONE 0
+  PINATTR PinName V-
+  PINATTR SpiceOrder 4
+  PIN 32 64 NONE 0
+  PINATTR PinName OUT
+  PINATTR SpiceOrder 5
+  PIN 0 32 NONE 0
+  PINATTR PinName V+
+  PINATTR SpiceOrder 3
+
+
   - Restart LTSpice and you should be able to search for your new custom Operational Amplifier
 
 
