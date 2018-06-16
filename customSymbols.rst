@@ -20,7 +20,7 @@ The existing components defined in the Component section will most probably not 
 
 First step is to find online the **sub**-circuit definition of the device you would like to simulate and save this file in either the LTSpice subcircuit directory [#ltsubcktdir]_ *or* your own directory.
 
-The next steps depend on how much time you are willing to invest in this symbol. The options are presented from easiest to hardest, also from worst to best looking.
+The next steps depend on how much time you are willing to invest in this symbol. The options are *semi*Auto to Manual.
 
 ---------------------
 Auto-generated Block
@@ -93,46 +93,77 @@ Link Symbol to Subcircuit Model File
 .. |dlgNetList| image:: img\dlgPinListNetlistOrder.png
 
 
-------------------
-Start from Scratch
-------------------
+--------------
+More in Depth
+--------------
 
+Here a couple of tips I have discovered along the way.
 
-  - Open the newly created *.asy* file for editing with any text editor
+Symbolic directories
+---------------------
 
-    + change the *<descName>* in the line :code:`SYMATTR Value <descName>` to a name you would like to identify your OpAmp
-    + change the *<SpiceModelFileName>* in the line :code:`SYMATTR SpiceModel <SpiceModelFileName>` to the model definition filename  e.g. :code:`myOpA.mod`
-    + change the *<SubcktName>* in the line :code:`SYMATTR Value2 <SubcktName>` to the name of the Subckt e.g. LM358 if :code:`.SUBCKT LM358 1 2 3 4 5`
-    + change the *<...>* in the line :code:`SYMATTR Description <...>` to whatever description you would like to give the component
+  LTSpice checks for symbols in its Symbols Library Directory [#ltsymdir]. If you want to keep separate the work which you have put into Symbol Generation and Model Searching online I would recommend to put these files in a directory outside of the LTSpice installation directory. This way it will be easier to Maintain, more portable across systems and incase of updating LTSpice avoid undesired suprises.
+
+  - In Windows to create a symbolic link we will use the command prompt.
+  
+    + *Run command prompt with Adminstrator rights*
+  
+  - Navigate to the LTSpice Library Directory
+  - Create a symbolic directory Link to the directory where you will store your created symbols and subcircuits:
+
+    + :code:`mklink /D mySym c:\usr\lib\spice\mySym`
+    + :code:`mklink /D mySub c:\usr\lib\spice\mySub`
+
+  - Now when browsing for a component defined, it will appear in the subdirectory named "mySym"
+  - Now when defining the **ModelFile** you can use the relative notation :code:`mySym\lm123.sub`
+
+Symbol File details
+--------------------
+
+The symbol generated in LTSpice with the symbol editor generates a text file which you can edit with any text editor you like. The drawing is defined with Lines, Circles, Pins... placed with pixel coordinates. The Attributes and Pins are also defined in this file, normally towards the end of the file.
+
+  - *<descName>* in the line :code:`SYMATTR Value <descName>` is the name of the defined subcircuit
+  - *<SpiceModelFileName>* in the line :code:`SYMATTR SpiceModel <SpiceModelFileName>` is the subcircuit definition filename  e.g. :code:`mySym\lm123.sub`
+  - *<SubcktName>* in the line :code:`SYMATTR Value2 <SubcktName>` can also be used to define the name of the subcircuit
+  - *<...>* in the line :code:`SYMATTR Description <...>` is the description you would like to give the component
+  
+
   - You will notice the lines :code:`PINATTR SpiceOrder 1` and  :code:`PINATTR PinName In+`
   
     + These numbers should correspond to the definition within your *.subckt* for the symbol diagram to be coherent
-    + Note that :code:`SpiceOrder` refers to the order in which the pins are defined in the subckt (left to right) not the actual numbers of letters
+    + Note that :code:`SpiceOrder` refers to the order in which the pins are defined in the subckt (left to right) not the actual numbers or letters
 
       * The PinName which describes the coherence between schematic and pin is what is important
 
-
-e.g. Spice Schematic: *MyOpA.asy*
-
 :: 
 
-  PIN -32 48 NONE 0
-  PINATTR PinName In-
-  PINATTR SpiceOrder 2
-  PIN -32 80 NONE 0
-  PINATTR PinName In+
+  SYMATTR Prefix X
+  SYMATTR Value TIP121
+  SYMATTR ModelFile paui\TIP121.sub
+  PIN 16 -48 LEFT 8
+  PINATTR PinName C
   PINATTR SpiceOrder 1
-  PIN 0 96 NONE 0
-  PINATTR PinName V-
-  PINATTR SpiceOrder 4
-  PIN 32 64 NONE 0
-  PINATTR PinName OUT
-  PINATTR SpiceOrder 5
-  PIN 0 32 NONE 0
-  PINATTR PinName V+
+  PIN -48 -16 TOP 8
+  PINATTR PinName B
+  PINATTR SpiceOrder 2
+  PIN 16 48 LEFT 8
+  PINATTR PinName E
   PINATTR SpiceOrder 3
 
 
+Symbol Drawing Aids
+--------------------
+
+To trace a symbol that you have in a schematic I have used a [Glass2k] on Windows to allow you to adjust the transparency of the current active window. |prgGlass2k|
+
+  - Open the datasheet with a pdf viewer
+  - Activate the symbol editor window on LTSpice
+  - Adjust the transparency of the LTSpice window so that you can see the Datasheet in the background.
+  - Trace your symbol :)
+
+I have a `backup copy of the program <rsc\Glass2k.exe.bku>`_ since it isn't maintained anymore and who knows how long the site will still be online.
+
+.. |prgGlass2k| image:: img\prgGlass2k.png
 
 ---------
 Resources
@@ -141,5 +172,6 @@ Resources
   - `Electronics Point Forum Adding new components to LTSPICE <https://www.electronicspoint.com/resources/adding-new-components-to-ltspice.20/>`_
   - `Circuit Exchange Internationl - LTSpice - Create New Symbols <http://www.zen22142.zen.co.uk/ltspice/newsymbols.htm>`_ 
 
+.. [Glass2k] http://chime.tv/products/glass2k.shtml
 .. [#ltsubcktdir] *Windows:* C:\Program Files (x86)\LTC\LTspiceIV\lib\sub
 .. [#ltsymdir] *Windows:* C:\Program Files (x86)\LTC\LTspiceIV\lib\sym
