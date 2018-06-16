@@ -9,4 +9,4 @@ Notes on adventures working with LTSpice
 - `Third Party Operational Amplifier Models <3rdPartyOpAmp.rst>`_
 - `Ideal OpAmp from Voltage Dependent Voltage Source <IdealOpAmp.rst>`_
 - `Plotting Two-Port Parameters (S11,S12,...) <Sparams.rst>`_
-
+- `Custom Schematic Component Symbols <customSymbols.rst>`_
