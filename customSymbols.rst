@@ -82,7 +82,7 @@ Link Symbol to Subcircuit Model File
 |  Value     |  ca3140 | The Name of the subcircuit as defined in the subcircuit file                          |
 +------------+---------+---------------------------------------------------------------------------------------+
 | ModelFile  |  <....> | absolute directory definition of the subcircuit file, can also be relative            |
-|            |         |       LTSpice searches in its *.../lib/sub/* folder for model definition files aswell |
+|            |         |       LTSpice searches in its .../lib/sub/ folder for model definition files aswell   |
 +------------+---------+---------------------------------------------------------------------------------------+
 
 
