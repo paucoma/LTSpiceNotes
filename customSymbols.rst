@@ -83,7 +83,7 @@ Link Symbol to Subcircuit Model File
 +------------+---------+---------------------------------------------------------------------------------------+
 |            |         |  .                                                                                    |
 |            |         |  absolute directory definition of the subcircuit file, can also be relative...        |
-| ModelFile  | . . . . |    LTSpice searches in its .../lib/sub/ folder for model definition files aswell      |
+| ModelFile  | . . . . |  LTSpice searches in its .../lib/sub/ folder for model definition files aswell        |
 +------------+---------+---------------------------------------------------------------------------------------+
 
 
