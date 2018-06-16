@@ -154,7 +154,7 @@ The symbol generated in LTSpice with the symbol editor generates a text file whi
 Symbol Drawing Aids
 --------------------
 
-To trace a symbol that you have in a schematic I have used a [Glass2k] on Windows to allow you to adjust the transparency of the current active window. |prgGlass2k|
+To trace a symbol that you have in a schematic I have used [Glass2k]_ on Windows. |prgGlass2k|
 
   - Open the datasheet with a pdf viewer
   - Activate the symbol editor window on LTSpice
