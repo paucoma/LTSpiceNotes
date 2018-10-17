@@ -16,11 +16,11 @@ Windings
 
 Turns Ratio
 -------------
- - defined by the inductance ratio together with the leakage.
+ - defined by the inductance ratio together with the **K coupling**.
    + N_1/N_2 = (1/K) * sqrt(L1) / sqrt(L2)
 
- - leakage is defined by adding a **Spice Directive**:
-   + :code:`K L1 L2 <leakage>` , where <leakage> [0,1]
+ - **K coupling** is defined by adding a **Spice Directive**:
+   + :code:`K L1 L2 <coupling>` , where <coupling> [0,1]
    + in the event of multiple windings, e.g. :code:`K L1 L2 L3 1`
 
 Floating Nodes
